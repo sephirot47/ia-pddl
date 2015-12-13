@@ -1,8 +1,8 @@
 
-(define (problem prblm)
+(define (problem problem01)
   (:domain reading_plan)
   (:objects b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14 b15 b16 - book
-  			jan feb mar apr may jun jul aug sep oct nov dec - month
+  			    jan feb mar apr may jun jul aug sep oct nov dec - month
   )
   
   (:init
@@ -83,7 +83,18 @@
   	
   	(before nov dec)
 
+
   	(pred b0 b1)
+    (pred b0 b2)
+    (pred b0 b3)
+    (pred b0 b4)
+    (pred b1 b2)
+    (pred b1 b3)
+    (pred b1 b4)
+    (pred b2 b3)
+    (pred b2 b4)
+    (pred b3 b4)
+
     (want b0)
     (want b1)
   )
@@ -91,13 +102,9 @@
   (:goal
     (and
     	(forall (?b - book)
-        	 (and (not (want ?b)))
+        	 (and (not (want ?b)) (assigned ?b))
     	)
-
-	    (forall (?m - month)
-	        (hasbook ?m)
-	    )
-	)
+	  )
   )
 )
 
