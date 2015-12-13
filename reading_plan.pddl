@@ -1,5 +1,5 @@
 (define (domain reading_plan)
-	(:requirements :strips :adl :typing)
+	(:requirements :adl :typing)
 	(:types book - object
 			month - object
 	)
@@ -32,6 +32,15 @@
 	  								 )
 	  						 )
 	  					)
+
+;	  					(forall (?bant - book)
+;	  						(imply (pred ?bant ?b)
+;	  							(exists (?m2 - month)
+;	  								(and (in ?b2 ?m2) (not (before ?m2 ?m)))
+;	  							)
+;	  						)
+;	  					)
+
 	  				)
 	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b))
 	)
