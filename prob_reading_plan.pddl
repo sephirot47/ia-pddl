@@ -6,7 +6,7 @@
   )
   
   (:init
-  	(before jan feb)
+  	(before jan feb) 
   	(before jan mar)
   	(before jan apr)
   	(before jan may)
@@ -83,6 +83,17 @@
   	
   	(before nov dec)
 
+    (right_before jan feb)
+    (right_before feb mar)
+    (right_before mar apr)
+    (right_before apr may)
+    (right_before may jun)
+    (right_before jun jul)
+    (right_before jul aug)
+    (right_before aug sep)
+    (right_before sep oct)
+    (right_before oct nov)
+    (right_before nov dec)
 
   	(pred b0 b1)
     (pred b0 b2)
@@ -94,6 +105,9 @@
     (pred b2 b3)
     (pred b2 b4)
     (pred b3 b4)
+
+
+    (paral b4 b5)
 
     (want b0)
     (want b1)
