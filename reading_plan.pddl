@@ -21,8 +21,10 @@
 	  :precondition (and 
 	  					(not (read ?b))
 	  					(not (assigned ?b))
-	  					(not (exists (?b2 - book) ;Comprobamos predecesores
-	  								 (and 
+	  					(not (exists (?b2 - book)
+	  							(or
+	  								;Comprobamos predecesores
+	  								(and 
 	  								 	(pred ?b2 ?b)
 	  								 	(or
 	  								 		(not (assigned ?b2))
@@ -30,54 +32,57 @@
   								 				(and (in ?b2 ?m2) (not (before ?m2 ?m)))
   								 			)
 	  								 	)
-	  								 )
-	  						 )
-	  					)
-	  					(not (exists (?b2 - book) ;Comprobamos paralelos
-	  								 (and 
-	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
-	  								 	(assigned ?b2)
-	  								 	(not 
-	  								 		(exists (?m2 - month)
-	  								 			(and
-	  								 				(in ?b2 ?m2)
-	  								 				(or
-	  								 					(in ?b2 ?m) ;m==m2
-	  								 					(right_before ?m ?m2)
-	  								 				)
-	  								 			)
-	  								 		)
-	  								 	)
 	  								)
-	  						 )
-	  					)
 
-;	  					(forall (?bant - book)
-;	  						(imply (pred ?bant ?b)
-;	  							(exists (?m2 - month)
-;	  								(and (in ?b2 ?m2) (not (before ?m2 ?m)))
-;	  							)
-;	  						)
-;	  					)
-			)
+	  								; Comprobamos paralelos
+	  								(and 
+	  								 	(paral ?b2 ?b)
+	  								 	(assigned ?b2)
+  								 		(and
+  								 			(not (in ?b2 ?m))
+  								 			(exists (?m2 - month)
+  								 				(not (and (in ?b2 ?m2) (or (right_before ?m ?m2)(right_before ?m2 ?m))))
+  								 			)
+  								 		)
+	  								)
+	  							)
+	  								 
+	  						)
+	  					)
+					)
 	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b))
 	)
 
-;	(:action switch-book
-;	  :parameters (?b - book ?m1 ?m2 - month)
-;	  :precondition (and
-;						(in ?b ?m1)
-;						(not (exists (?b2 - book)
-;	  								 (and 
-;	  								 	(pred ?b2 ?b) 
- ; 								 		(exists (?m3 - month)
-  ;								 			(and (in ?b2 ?m3) (not (before ?m3 ?m2)))
-  ;								 		)
-	;  								 )
-	 ; 						 )
-	 ; 					)
-	;				)
-	 ; :effect (and (not (in ?b ?m1)) (in ?b ?m2))
-	;)
-;
+	(:action switch-book
+	  :parameters (?b - book ?m1 ?m2 - month)
+	  :precondition (and
+						(in ?b ?m1)
+						(not (exists (?b2 - book)
+								(or
+									;Comprobamos predecesores
+									(and 
+	  									(pred ?b2 ?b) 
+										(exists (?m3 - month)
+											(and (in ?b2 ?m3) (not (before ?m3 ?m2)))
+										)
+  									)
+
+  									; Comprobamos paralelos
+  									(and
+  										(paral ?b2 ?b)
+  										(assigned ?b2)
+  								 		(and
+  								 			(not (in ?b2 ?m2))
+  								 			(exists (?m3 - month)
+  								 				(not (and (in ?b2 ?m3) (or (right_before ?m2 ?m3)(right_before ?m3 ?m2))))
+  								 			)
+  								 		)
+  									)
+								)
+	  						 )
+	  					)
+					)
+	  :effect (and (not (in ?b ?m1)) (in ?b ?m2))
+	)
+
 )

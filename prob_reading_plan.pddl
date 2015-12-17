@@ -108,6 +108,7 @@
 
 
     (paral b4 b5)
+    (paral b5 b4)
 
     (want b0)
     (want b1)
