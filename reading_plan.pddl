@@ -34,9 +34,9 @@
 	  								 	)
 	  								)
 
-	  								; Comprobamos paralelos
+	  								;Comprobamos paralelos
 	  								(and 
-	  								 	(paral ?b2 ?b)
+	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
 	  								 	(assigned ?b2)
   								 		(and
   								 			(not (in ?b2 ?m))
@@ -57,6 +57,7 @@
 	  :parameters (?b - book ?m1 ?m2 - month)
 	  :precondition (and
 						(in ?b ?m1)
+						(or (before ?m1 ?m2) (before ?m2 ?m1)) ;mesos diferents
 						(not (exists (?b2 - book)
 								(or
 									;Comprobamos predecesores
@@ -67,9 +68,9 @@
 										)
   									)
 
-  									; Comprobamos paralelos
+  									;Comprobamos paralelos
   									(and
-  										(paral ?b2 ?b)
+	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
   										(assigned ?b2)
   								 		(and
   								 			(not (in ?b2 ?m2))

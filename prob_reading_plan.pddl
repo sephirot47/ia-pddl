@@ -95,7 +95,7 @@
     (right_before oct nov)
     (right_before nov dec)
 
-  	(pred b0 b1)
+    (pred b0 b1)
     (pred b0 b2)
     (pred b0 b3)
     (pred b0 b4)
@@ -105,21 +105,41 @@
     (pred b2 b3)
     (pred b2 b4)
     (pred b3 b4)
-
+    (pred b3 b14)
+    (pred b12 b14)
+    (pred b11 b15)
+    (pred b15 b14)    
 
     (paral b4 b5)
-    (paral b5 b4)
+    (paral b10 b14) 
+    (paral b0 b15)
+
 
     (want b0)
     (want b1)
+    (want b2)
+    (want b3)
+    (want b4)
+    (want b5)
+    (want b6)
+    (want b7)
+    (want b8)
+    (want b9)
+    (want b10)
+    (want b11)
+    (want b12)
+    (want b13)
+    (want b14)
+    (want b15)
+    (want b16)
   )
   
   (:goal
     (and
     	(forall (?b - book)
-        	 (and (not (want ?b)) (assigned ?b))
+        	 (and (not (want ?b)))
     	)
-	  )
+    )
   )
 )
 
