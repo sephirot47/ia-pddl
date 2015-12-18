@@ -21,35 +21,75 @@
 	  :precondition (and 
 	  					(not (read ?b))
 	  					(not (assigned ?b))
-	  					(not (exists (?b2 - book)
-	  							(or
-	  								;Comprobamos predecesores
-	  								(and 
-	  								 	(pred ?b2 ?b)
-	  								 	(or
-	  								 		(not (assigned ?b2))
-  								 			(exists (?m2 - month)
-  								 				(and (in ?b2 ?m2) (not (before ?m2 ?m)))
-  								 			)
-	  								 	)
-	  								)
+	  					;(not (exists (?b2 - book)
+;  							(or
+;  								;Comprobamos predecesores
+;  								(and 
+;  								 	(pred ?b2 ?b)
+;  								 	(or
+;  								 		(not (assigned ?b2))
+; 								 			(exists (?m2 - month)
+; 								 				(and (in ?b2 ?m2) (not (before ?m2 ?m)))
+; 								 			)
+;  								 	)
+;  								)
+;  								;Comprobamos paralelos
+;  								(and 
+;  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
+;  								 	(assigned ?b2)
+; 								 		(and
+; 								 			(not (in ?b2 ?m))
+; 								 			(exists (?m2 - month)
+; 								 				(not (and (in ?b2 ?m2) (or (right_before ?m ?m2)(right_before ?m2 ?m))))
+; 								 			)
+; 								 		)
+;	  								)
+;	  							)
+;	  						)
+;  						)
+  						(forall (?b2 - book)
+							(and
+  								;Comprobamos predecesores
+								(imply (pred ?b2 ?b)
+									(and
+  								 		(assigned ?b2)
+								 		(not (exists (?m2 - month)
+								 			(and (in ?b2 ?m2) (not (before ?m2 ?m)))
+								 		))
+  								 	)
+								)
+								;Comprobamos paralelos
+								(imply (and (or (paral ?b2 ?b) (paral ?b ?b2)) (assigned ?b2))
+						 			(or
+							 			(in ?b2 ?m) ;mismo mes
+							 			(forall (?m2 - month)
+							 				(and (in ?b2 ?m2) (or (right_before ?m ?m2)(right_before ?m2 ?m)))
+							 			)
+							 		)
+  								)
+							)
+						)
+;						(forall (?b2 - book)
+;  							(and
+;  								;Comprobamos predecesores
+;  								(imply (pred ?b2 ?b)
+;					 				(exists (?m2 - month)
+;						 				(and (in ?b2 ?m2) (before ?m2 ?m))
+;						 			)
+;  								)
 
-	  								;Comprobamos paralelos
-	  								(and 
-	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
-	  								 	(assigned ?b2)
-  								 		(and
-  								 			(not (in ?b2 ?m))
-  								 			(exists (?m2 - month)
-  								 				(not (and (in ?b2 ?m2) (or (right_before ?m ?m2)(right_before ?m2 ?m))))
-  								 			)
-  								 		)
-	  								)
-	  							)
-	  								 
-	  						)
-	  					)
-					)
+;  								;Comprobamos paralelos
+;  								(imply (and (or (paral ?b2 ?b) (paral ?b ?b2)) (assigned ?b2))
+;  									(or
+;  										(in ?b2 ?m) ;mismo mes
+;  										(exists (?m2 - month)
+;						 					(and (in ?b2 ?m2)  (or (right_before ?m ?m2)(right_before ?m2 ?m)) )
+;						 				)
+;  									)
+;  								)
+;  							)
+;  						)
+	  				)
 	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b))
 	)
 
@@ -82,12 +122,13 @@
 
   									;Comprobamos que la condicion de paralelos se cumpla cuando se efectue el switch
   									(and
-	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
-  										(assigned ?b2)
+	  								 	(or (paral ?b2 ?b) (paral ?b ?b2)) ;si b es paralelo a b2
+  										(assigned ?b2) ;y esta asignado
   								 		(and
-  								 			(not (in ?b2 ?m2))
-  								 			(exists (?m3 - month)
-  								 				(not (and (in ?b2 ?m3) (or (right_before ?m2 ?m3)(right_before ?m3 ?m2))))
+  								 			(not (in ?b2 ?m2)) ;en el caso en que b2 este asignado al mes al que queremos mover b, descartamos
+  								 			;en el caso en que b2 este asignado a un mes que no sea consecutivo al mes al que queremos mover b, descartamos
+  								 			(exists (?m3 - month) 
+  								 				(not (and (in ?b2 ?m3) (or (right_before ?m2 ?m3) (right_before ?m3 ?m2))))
   								 			)
   								 		)
   									)

@@ -109,11 +109,11 @@
     (pred b12 b14)
     (pred b11 b15)
     (pred b15 b14)    
-
+    (pred b6 b0)
+    
     (paral b4 b5)
     (paral b10 b14) 
     (paral b0 b15)
-
 
     (want b0)
     (want b1)
@@ -121,10 +121,10 @@
     (want b3)
     (want b4)
     (want b5)
-    (want b6)
-    (want b7)
-    (want b8)
-    (want b9)
+;   (want b6)
+;   (want b7)
+;   (want b8)
+;   (want b9)
     (want b10)
     (want b11)
     (want b12)
@@ -137,7 +137,7 @@
   (:goal
     (and
     	(forall (?b - book)
-        	 (and (not (want ?b)))
+        	 (not (want ?b))
     	)
     )
   )
