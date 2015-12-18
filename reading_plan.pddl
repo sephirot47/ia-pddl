@@ -53,22 +53,34 @@
 	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b))
 	)
 
+
 	(:action switch-book
 	  :parameters (?b - book ?m1 ?m2 - month)
 	  :precondition (and
 						(in ?b ?m1)
-						(or (before ?m1 ?m2) (before ?m2 ?m1)) ;mesos diferents
+						(or (before ?m1 ?m2) (before ?m2 ?m1)) ;meses diferentes
 						(not (exists (?b2 - book)
-								(or
-									;Comprobamos predecesores
-									(and 
-	  									(pred ?b2 ?b) 
-										(exists (?m3 - month)
-											(and (in ?b2 ?m3) (not (before ?m3 ?m2)))
-										)
-  									)
+								(or ;si falla en alguno de los dos, lo descartamos
+									;Comprobamos que la condicion de predecesores se cumpla cuando se efectue el switch 
+									(or 
+										;si b2 es predecesor de b y al mover b, b2 esta after o igual de b, descartamos
+										(and 
+		  									(pred ?b2 ?b)
+											(exists (?m3 - month)
+												(and (in ?b2 ?m3) (not (before ?m3 ?m2)))
+											)
+  										)
 
-  									;Comprobamos paralelos
+										;si b es predecesor de b2 y al mover b, b esta after o igual de b2, descartamos
+  										(and
+  											(pred ?b ?b2)
+  											(exists (?m3 - month)
+												(and (in ?b2 ?m3) (not (before ?m2 ?m3)))
+											)
+  										)
+									)
+
+  									;Comprobamos que la condicion de paralelos se cumpla cuando se efectue el switch
   									(and
 	  								 	(or (paral ?b2 ?b) (paral ?b ?b2))
   										(assigned ?b2)
@@ -84,6 +96,5 @@
 	  					)
 					)
 	  :effect (and (not (in ?b ?m1)) (in ?b ?m2))
-	)
-
+	 )
 )
