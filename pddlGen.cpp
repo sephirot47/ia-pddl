@@ -237,7 +237,7 @@ void coutWants()
         int r = rand() % numBooks;
         if(wants[r]) continue;
 
-        cout << "\t\t(wants  ";
+        cout << "\t\t(want  ";
         cout << bookNames[r] << ")" << endl;
 
         wants[r] = true;
