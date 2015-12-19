@@ -62,9 +62,9 @@
 								(imply (and (or (paral ?b2 ?b) (paral ?b ?b2)) (assigned ?b2))
 						 			(or
 							 			(in ?b2 ?m) ;mismo mes
-							 			(forall (?m2 - month)
-							 				(and (in ?b2 ?m2) (or (right_before ?m ?m2)(right_before ?m2 ?m)))
-							 			)
+							 			(not (exists (?m2 - month)
+							 				(and (in ?b2 ?m2) (not (or (right_before ?m ?m2)(right_before ?m2 ?m))))
+							 			))
 							 		)
   								)
 							)
