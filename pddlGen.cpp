@@ -263,7 +263,7 @@ int main(int argc, char** args)
       { cout << "Too many preds" << endl; exit(-1); }
     if(numPreds + numParals >= numBooks)
       { cout << "Too many parals" << endl; exit(-1); }
-    if(numWants >= numBooks)
+    if(numWants > numBooks)
       { cout << "Too many wants" << endl; exit(-1); }
 
 
