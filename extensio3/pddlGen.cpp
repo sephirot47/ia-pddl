@@ -50,6 +50,8 @@ void init()
 
     body = "\
               (:init\n\
+                (current jan)\n\
+                \n\
                 (right_before jan feb)\n\
                 (right_before feb mar)\n\
                 (right_before mar apr)\n\
