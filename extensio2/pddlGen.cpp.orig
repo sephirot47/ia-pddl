@@ -195,10 +195,16 @@ void coutPreds()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(pred   ";
+<<<<<<< HEAD:pddlGen.cpp
         cout << bookNames[rBook0];
         for(int i = bookNames[rBook0].size(); i < 21; ++i)
             cout << " "; //tab manual a tomar por culo
         cout << " " << bookNames[rBook1] << ")" << endl;
+=======
+        cout << bookNames[rBook0] << " ";
+        for(int i = bookNames[rBook0].size(); i < 21; ++i) cout << " ";
+        cout << bookNames[rBook1] << ")" << endl;
+>>>>>>> 0723071b88a2839b6eb9806647417cba0bf4affc:extensio2/pddlGen.cpp
 
         addReachability(rBook0, rBook1);
         preds[rBook0][rBook1] = true;
@@ -217,10 +223,16 @@ void coutParals()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(paral  ";
+<<<<<<< HEAD:pddlGen.cpp
         cout << bookNames[rBook0];
         for(int i = bookNames[rBook0].size(); i < 20; ++i)
             cout << " "; //tab manual a tomar por culo
         cout << " " << bookNames[rBook1] << ")" << endl;
+=======
+        cout << bookNames[rBook0] << " ";
+        for(int i = bookNames[rBook0].size(); i < 20; ++i) cout << " ";
+        cout << bookNames[rBook1] << ")" << endl;
+>>>>>>> 0723071b88a2839b6eb9806647417cba0bf4affc:extensio2/pddlGen.cpp
 
         addReachability(rBook0, rBook1);
         preds[rBook0][rBook1] = true;

@@ -1,0 +1,10 @@
+all:
+	g++ --std=c++11 pddlGen.cpp -o pddlGen
+<<<<<<< HEAD:makefile
+
+clean:
+	rm -f tmp*
+	rm -f error.log
+	clear
+=======
+>>>>>>> 0723071b88a2839b6eb9806647417cba0bf4affc:extensio2/makefile

@@ -1,21 +1,19 @@
 (define (domain reading_plan)
 	(:requirements :adl :typing :fluents)
 	(:types book - object
-			month - object
+		month - object
 	)
 
 	(:predicates
 		(pred ?b1 ?b2 - book) ; b1 is predecessor of b2
 		(paral ?b1 ?b2 - book) ; b1 is parallel to b2
-		(read ?b - book)
 		(want ?b - book)
 		(assigned ?b - book)
 		(in ?b - book ?m - month) ; the book b is read in the month m
-		(before ?m1 ?m2 - month)
 		(right_before ?m1 ?m2 - month)
 		(current ?m - month)
 	)
-
+	
 	(:functions 
 		(pgb ?b - book)
 		(pgm ?m - month)
@@ -26,7 +24,6 @@
 	  :precondition (and 
 	  					(current ?m)
 	  					(<= (+ (pgm ?m) (pgb ?b)) 800)
-	  					(not (read ?b))
 	  					(not (assigned ?b))
 	  					(forall (?b2 - book)
 	  						(and 
@@ -52,7 +49,7 @@
 	  						)
 	  					)
 	  				)
-	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b) (increase (pgm ?m) (pgb ?b)))
+	  :effect (and (in ?b ?m) (not (want ?b)) (assigned ?b) (increase (pgm ?m) (pgb ?b)))
 	)
 
 	(:action next-month
