@@ -7,7 +7,6 @@
 	(:predicates
 		(pred ?b1 - book ?b2 - book) ; b1 is predecessor of b2
 		(paral ?b1 - book ?b2 - book) ; b1 is parallel to b2
-		(read ?b - book)
 		(want ?b - book)
 		(right_before ?m - month ?m2 - month)
 		(in ?b - book ?m - month) ; the book b is read in the month m
@@ -19,7 +18,6 @@
 	(:action assign-book
 	  :parameters (?b - book ?m - month)
 	  :precondition (and 
-	  					(not (read ?b))
 	  					(not (assigned ?b))
   						(forall (?b2 - book)
 							(and
@@ -48,7 +46,7 @@
 							)
 						)
 	  				)
-	  :effect (and (in ?b ?m) (read ?b) (not (want ?b)) (assigned ?b))
+	  :effect (and (in ?b ?m) (not (want ?b)) (assigned ?b))
 	)
 
 
