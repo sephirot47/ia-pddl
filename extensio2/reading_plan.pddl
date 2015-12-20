@@ -11,7 +11,6 @@
 		(right_before ?m - month ?m2 - month)
 		(in ?b - book ?m - month) ; the book b is read in the month m
 		(before ?m1 - month ?m2 - month)
-		(hasbook ?m - month)
 		(assigned ?b - book)
 	)
 
