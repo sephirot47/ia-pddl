@@ -1,3 +1,5 @@
 ff
 pddlGen
-tmp
+tmp*
+error.log
+*.swp

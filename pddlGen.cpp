@@ -198,7 +198,7 @@ void coutPreds()
         cout << bookNames[rBook0];
         for(int i = bookNames[rBook0].size(); i < 21; ++i)
             cout << " "; //tab manual a tomar por culo
-        cout << bookNames[rBook1] << ")" << endl;
+        cout << " " << bookNames[rBook1] << ")" << endl;
 
         addReachability(rBook0, rBook1);
         preds[rBook0][rBook1] = true;
@@ -220,7 +220,7 @@ void coutParals()
         cout << bookNames[rBook0];
         for(int i = bookNames[rBook0].size(); i < 20; ++i)
             cout << " "; //tab manual a tomar por culo
-        cout << bookNames[rBook1] << ")" << endl;
+        cout << " " << bookNames[rBook1] << ")" << endl;
 
         addReachability(rBook0, rBook1);
         preds[rBook0][rBook1] = true;
