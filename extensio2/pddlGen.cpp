@@ -195,9 +195,8 @@ void coutPreds()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(pred   ";
-        cout << bookNames[rBook0];
-        for(int i = bookNames[rBook0].size(); i < 21; ++i)
-            cout << " "; //tab manual a tomar por culo
+        cout << bookNames[rBook0] << " ";
+        for(int i = bookNames[rBook0].size(); i < 21; ++i) cout << " ";
         cout << bookNames[rBook1] << ")" << endl;
 
         addReachability(rBook0, rBook1);
@@ -217,9 +216,8 @@ void coutParals()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(paral  ";
-        cout << bookNames[rBook0];
-        for(int i = bookNames[rBook0].size(); i < 20; ++i)
-            cout << " "; //tab manual a tomar por culo
+        cout << bookNames[rBook0] << " ";
+        for(int i = bookNames[rBook0].size(); i < 20; ++i) cout << " ";
         cout << bookNames[rBook1] << ")" << endl;
 
         addReachability(rBook0, rBook1);
@@ -237,7 +235,7 @@ void coutWants()
         int r = rand() % numBooks;
         if(wants[r]) continue;
 
-        cout << "\t\t(wants  ";
+        cout << "\t\t(want  ";
         cout << bookNames[r] << ")" << endl;
 
         wants[r] = true;
@@ -263,7 +261,7 @@ int main(int argc, char** args)
       { cout << "Too many preds" << endl; exit(-1); }
     if(numPreds + numParals >= numBooks)
       { cout << "Too many parals" << endl; exit(-1); }
-    if(numWants >= numBooks)
+    if(numWants > numBooks)
       { cout << "Too many wants" << endl; exit(-1); }
 
 

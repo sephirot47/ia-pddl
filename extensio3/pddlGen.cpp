@@ -50,72 +50,6 @@ void init()
 
     body = "\
               (:init\n\
-                (before jan feb)\n\
-                (before jan mar)\n\
-                (before jan apr)\n\
-                (before jan may)\n\
-                (before jan jun)\n\
-                (before jan jul)\n\
-                (before jan aug)\n\
-                (before jan sep)\n\
-                (before jan oct)\n\
-                (before jan nov)\n\
-                (before jan dec)\n\
-                (before feb mar)\n\
-                (before feb apr)\n\
-                (before feb may)\n\
-                (before feb jun)\n\
-                (before feb jul)\n\
-                (before feb aug)\n\
-                (before feb sep)\n\
-                (before feb oct)\n\
-                (before feb nov)\n\
-                (before feb dec)\n\
-                (before mar apr)\n\
-                (before mar may)\n\
-                (before mar jun)\n\
-                (before mar jul)\n\
-                (before mar aug)\n\
-                (before mar sep)\n\
-                (before mar oct)\n\
-                (before mar nov)\n\
-                (before mar dec)\n\
-                (before apr may)\n\
-                (before apr jun)\n\
-                (before apr jul)\n\
-                (before apr aug)\n\
-                (before apr sep)\n\
-                (before apr oct)\n\
-                (before apr nov)\n\
-                (before apr dec)\n\
-                (before may jun)\n\
-                (before may jul)\n\
-                (before may aug)\n\
-                (before may sep)\n\
-                (before may oct)\n\
-                (before may nov)\n\
-                (before may dec)\n\
-                (before jun jul)\n\
-                (before jun aug)\n\
-                (before jun sep)\n\
-                (before jun oct)\n\
-                (before jun nov)\n\
-                (before jun dec)\n\
-                (before jul aug)\n\
-                (before jul sep)\n\
-                (before jul oct)\n\
-                (before jul nov)\n\
-                (before jul dec)\n\
-                (before aug sep)\n\
-                (before aug oct)\n\
-                (before aug nov)\n\
-                (before aug dec)\n\
-                (before sep oct)\n\
-                (before sep nov)\n\
-                (before sep dec)\n\
-                (before oct nov)\n\
-                (before oct dec)\n\
-                (before nov dec)\n\
                 (right_before jan feb)\n\
                 (right_before feb mar)\n\
                 (right_before mar apr)\n\
@@ -130,6 +64,18 @@ void init()
     ";
 
     tail = "\n\
+            \t(= (pgm jan) 0)\n\
+            \t(= (pgm feb) 0)\n\
+            \t(= (pgm mar) 0)\n\
+            \t(= (pgm apr) 0)\n\
+            \t(= (pgm may) 0)\n\
+            \t(= (pgm jun) 0)\n\
+            \t(= (pgm jul) 0)\n\
+            \t(= (pgm aug) 0)\n\
+            \t(= (pgm sep) 0)\n\
+            \t(= (pgm oct) 0)\n\
+            \t(= (pgm nov) 0)\n\
+            \t(= (pgm dec) 0)\n\n\
             )\n\
             (:goal\n\
               (and\n\
@@ -195,7 +141,7 @@ void coutPreds()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(pred   ";
-        cout << bookNames[rBook0];
+        cout << bookNames[rBook0] << " ";
         for(int i = bookNames[rBook0].size(); i < 21; ++i)
             cout << " "; //tab manual a tomar por culo
         cout << bookNames[rBook1] << ")" << endl;
@@ -217,7 +163,7 @@ void coutParals()
         if(reachables[rBook0][rBook1]) continue; //avoid deadlock
 
         cout << "\t\t(paral  ";
-        cout << bookNames[rBook0];
+        cout << bookNames[rBook0] << " ";
         for(int i = bookNames[rBook0].size(); i < 20; ++i)
             cout << " "; //tab manual a tomar por culo
         cout << bookNames[rBook1] << ")" << endl;
@@ -226,6 +172,16 @@ void coutParals()
         preds[rBook0][rBook1] = true;
         ++paralsDone;
     }
+}
+
+void coutPGMs()
+{
+  for(int i = 0; i < bookNames.size(); ++i)
+  {
+    cout << "\t\t(= (pgb ";
+    cout << bookNames[i] + ") ";
+    cout << to_string(rand() % 50 + 1) << ")" << endl;
+  }
 }
 
 void coutWants()
@@ -237,7 +193,7 @@ void coutWants()
         int r = rand() % numBooks;
         if(wants[r]) continue;
 
-        cout << "\t\t(wants  ";
+        cout << "\t\t(want  ";
         cout << bookNames[r] << ")" << endl;
 
         wants[r] = true;
@@ -263,7 +219,7 @@ int main(int argc, char** args)
       { cout << "Too many preds" << endl; exit(-1); }
     if(numPreds + numParals >= numBooks)
       { cout << "Too many parals" << endl; exit(-1); }
-    if(numWants >= numBooks)
+    if(numWants > numBooks)
       { cout << "Too many wants" << endl; exit(-1); }
 
 
@@ -281,6 +237,7 @@ int main(int argc, char** args)
     coutPreds(); cout << endl;
     coutParals(); cout << endl;
     coutWants(); cout << endl;
+    coutPGMs(); cout << endl;
     cout << tail << endl;
     return 0;
 }

@@ -1,0 +1,62 @@
+            (define (problem problem01)
+            (:domain reading_plan)
+            
+(:objects Pan_el_agraciado Pan_el_tuerto Balboa_el_senor Harry_el_tuerto Potter_el_gnomo Rocky_el_viejo Rocky_el_verde Potter_el_senor Rocky_el_agraciado Potter_el_cojo - book
+jan feb mar apr may jun jul aug sep oct nov dec - month)
+              (:init
+                (right_before jan feb)
+                (right_before feb mar)
+                (right_before mar apr)
+                (right_before apr may)
+                (right_before may jun)
+                (right_before jun jul)
+                (right_before jul aug)
+                (right_before aug sep)
+                (right_before sep oct)
+                (right_before oct nov)
+                (right_before nov dec)
+    
+
+
+		(want  Rocky_el_viejo)
+		(want  Potter_el_cojo)
+		(want  Rocky_el_verde)
+		(want  Pan_el_agraciado)
+		(want  Pan_el_tuerto)
+		(want  Balboa_el_senor)
+
+		(= (pgb Pan_el_agraciado) 400)
+		(= (pgb Pan_el_tuerto) 400)
+		(= (pgb Balboa_el_senor) 400)
+		(= (pgb Harry_el_tuerto) 400)
+		(= (pgb Potter_el_gnomo) 400)
+		(= (pgb Rocky_el_viejo) 400)
+		(= (pgb Rocky_el_verde) 400)
+		(= (pgb Potter_el_senor) 400)
+		(= (pgb Rocky_el_agraciado) 400)
+		(= (pgb Potter_el_cojo) 400)
+
+
+            	(= (pgm jan) 0)
+            	(= (pgm feb) 0)
+            	(= (pgm mar) 0)
+            	(= (pgm apr) 0)
+            	(= (pgm may) 0)
+            	(= (pgm jun) 0)
+            	(= (pgm jul) 0)
+            	(= (pgm aug) 0)
+            	(= (pgm sep) 0)
+            	(= (pgm oct) 0)
+            	(= (pgm nov) 0)
+            	(= (pgm dec) 0)
+
+            )
+            (:goal
+              (and
+                  (forall (?b - book)
+                       (not (want ?b))
+                  )
+              )
+            )
+          )
+  
