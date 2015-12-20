@@ -180,7 +180,7 @@ void coutPGMs()
   {
     cout << "\t\t(= (pgb ";
     cout << bookNames[i] + ") ";
-    cout << to_string(rand() % 50 + 1) << ")" << endl;
+    cout << to_string(rand() % 800 + 1) << ")" << endl;
   }
 }
 
