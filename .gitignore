@@ -1,6 +1,7 @@
 ff
 mff
-pddlGen
+*/pddlGen
 tmp*
 error.log
 *.swp
+result*
