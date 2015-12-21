@@ -252,7 +252,7 @@ void coutReads()
         int r = rand() % numBooks;
         if(wants[r] || reads[r]) continue;
 
-        cout << "\t\t(want  ";
+        cout << "\t\t(read  ";
         cout << bookNames[r] << ")" << endl;
 
         reads[r] = true;
