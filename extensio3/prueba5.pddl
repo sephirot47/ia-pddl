@@ -30,7 +30,6 @@
     (pred b2 b4)
     (pred b3 b4)
 
-
     (pred b10 b11)
     (pred b10 b12)
     (pred b10 b13)
@@ -41,6 +40,16 @@
     (pred b12 b13)
     (pred b12 b14)
     (pred b13 b14)
+
+    (paral b0 b10)
+    (paral b1 b11)
+    (paral b2 b12)
+    (paral b3 b13)
+    (paral b4 b14)
+
+    (paral b5 b6)
+    (paral b5 b7)
+    (paral b6 b7)
 
     (read b0)
     (want b1)
@@ -53,6 +62,10 @@
     (want b12)
     (want b13)
     (want b14)
+
+    (want b5)
+    (want b6)
+    (want b7)
 
     (= (pgm jan) 0)
     (= (pgm feb) 0)

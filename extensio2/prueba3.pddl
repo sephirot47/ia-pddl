@@ -110,7 +110,10 @@
     (pred b11 b10)
 
     (paral b7 b8)
+    (paral b7 b9)
+    (paral b7 b10)
     (paral b8 b9)
+    (paral b8 b10)
     (paral b9 b10)
 
     (read b0)

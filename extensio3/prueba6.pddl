@@ -30,7 +30,6 @@
     (pred b2 b4)
     (pred b3 b4)
 
-
     (pred b10 b11)
     (pred b10 b12)
     (pred b10 b13)
@@ -42,23 +41,31 @@
     (pred b12 b14)
     (pred b13 b14)
 
-    (want b0)
-    (want b1)
-    (want b2)
-    (want b3)
-    (want b4)
-
     (paral b0 b10)
     (paral b1 b11)
     (paral b2 b12)
     (paral b3 b13)
     (paral b4 b14)
 
-    (want b10)
-    (want b11)
+    (paral b5 b6)
+    (paral b5 b7)
+    (paral b6 b7)
+
+    (read b0)
+    (want b1)
+    (want b2)
+    (want b3)
+    (want b4)
+
+    (read b10)
+    (read b11)
     (want b12)
     (want b13)
     (want b14)
+
+    (want b5)
+    (want b6)
+    (want b7)
 
     (= (pgm jan) 0)
     (= (pgm feb) 0)
@@ -73,19 +80,19 @@
     (= (pgm nov) 0)
     (= (pgm dec) 0)
 
-    (= (pgb b0) 600)
+    (= (pgb b0) 400)
     (= (pgb b1) 400)
     (= (pgb b2) 400)
     (= (pgb b3) 400)
     (= (pgb b4) 400)
-    (= (pgb b5) 400)
-    (= (pgb b6) 400)
-    (= (pgb b7) 400)
+    (= (pgb b5) 100)
+    (= (pgb b6) 100)
+    (= (pgb b7) 100)
     (= (pgb b8) 400)
     (= (pgb b9) 400)
     (= (pgb b10) 400)
     (= (pgb b11) 400)
-    (= (pgb b12) 600)
+    (= (pgb b12) 400)
     (= (pgb b13) 400)
     (= (pgb b14) 400)
     (= (pgb b15) 400)
@@ -94,9 +101,9 @@
   
   (:goal
     (and
-    	(forall (?b - book)
-        	 (not (want ?b))
-    	)
+        (forall (?b - book)
+             (not (want ?b))
+        )
     )
   )
 )
