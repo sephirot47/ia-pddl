@@ -8,7 +8,12 @@ FPRED=$2
 FPARAL=$3
 FWANT=$4
 
-echo $MAXNBOOKS,$FPRED,$FPARAL,$FPARAL,$FWANT
+RESULTFILE=result-$MAXNBOOKS-$FPRED-$FPARAL-$FWANT
+
+rm -f tmp*
+
+rm -f $RESULTFILE
+echo $MAXNBOOKS,$FPRED,$FPARAL,$FPARAL,$FWANT >> $RESULTFILE
 
 for (( N = 1; N <= MAXNBOOKS; N++ ))
 do
@@ -24,9 +29,9 @@ do
 	then
 		if [[ $TIME == " sim" ]] 
 		then
-			echo -n 0.0,
+			echo -n $TIME, >> $RESULTFILE
 		else
-			echo -n $TIME,
+			echo -n $TIME, >> $RESULTFILE
 		fi
 	else
 		echo ""

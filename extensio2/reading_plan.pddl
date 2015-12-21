@@ -8,6 +8,7 @@
 		(pred ?b1 - book ?b2 - book) ; b1 is predecessor of b2
 		(paral ?b1 - book ?b2 - book) ; b1 is parallel to b2
 		(want ?b - book)
+		(read ?b - book)
 		(right_before ?m - month ?m2 - month)
 		(in ?b - book ?m - month) ; the book b is read in the month m
 		(before ?m1 - month ?m2 - month)
@@ -18,18 +19,22 @@
 	  :parameters (?b - book ?m - month)
 	  :precondition (and 
 	  					(not (assigned ?b))
+  						(not (read ?b))
   						(forall (?b2 - book)
 							(and
   								;Comprobamos predecesores
 								(imply (pred ?b2 ?b)
-									(and
-  								 		(assigned ?b2) ;sus predecesores ya estan asignados
-								 		(forall (?m2 - month)
-								 			(imply (in ?b2 ?m2)
-								 				(before ?m2 ?m)
-								 			)
-								 		)
-  								 	)
+									(or 
+										(read ?b2)
+										(and
+	  								 		(assigned ?b2) ;sus predecesores ya estan asignados
+									 		(forall (?m2 - month)
+									 			(imply (in ?b2 ?m2)
+									 				(before ?m2 ?m)
+									 			)
+									 		)
+	  								 	)
+	  								)
 								)
 								;Comprobamos paralelos
 								(imply (and (or (paral ?b2 ?b) (paral ?b ?b2)) (assigned ?b2))
