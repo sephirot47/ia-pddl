@@ -110,10 +110,13 @@
     (pred b11 b10)
 
     (read b0)
+    (read b11)
+    
     (want b1)
     (want b2)
     (want b3)
     (want b4)
+    
   )
   
   (:goal

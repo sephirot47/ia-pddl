@@ -39,7 +39,7 @@ vector<vector<bool>> reachables;
 vector<vector<bool>> preds;
 
 string head, body, tail;
-int numBooks, numPreds, numParals, numWants;
+int numBooks, numPreds, numParals, numWants, numReads;
 
 void init()
 {
@@ -226,9 +226,9 @@ void coutParals()
     }
 }
 
+vector<bool> wants(numBooks, false);
 void coutWants()
 {
-    vector<bool> wants(numBooks, false);
     int wantsDone = 0, tries = 0;
     while(wantsDone < numWants && ++tries < 99999)
     {
@@ -243,26 +243,46 @@ void coutWants()
     }
 }
 
+void coutReads()
+{
+    vector<bool> reads(numBooks, false);
+    int readsDone = 0, tries = 0;
+    while(readsDone < numReads && ++tries < 99999)
+    {
+        int r = rand() % numBooks;
+        if(wants[r] || reads[r]) continue;
+
+        cout << "\t\t(want  ";
+        cout << bookNames[r] << ")" << endl;
+
+        reads[r] = true;
+        ++readsDone;
+    }
+}
+
 void usage()
 {
     cout << "ERROR. Wrong parameters." << endl;
-    cout << "Usage: ./pddlGen numLlibres numPreds numParals numWants";
+    cout << "Usage: ./pddlGen numLlibres numPreds numParals numWants numReads";
     cout << endl;
 }
 
 int main(int argc, char** args)
 {
-    if(argc <= 4) { usage(); exit(-1); }
+    if(argc <= 5) { usage(); exit(-1); }
     numBooks  = atoi(args[1]);
     numPreds  = atoi(args[2]);
     numParals = atoi(args[3]);
     numWants  = atoi(args[4]);
+    numReads  = atoi(args[5]);
     if(numPreds >= numBooks)
       { cout << "Too many preds" << endl; exit(-1); }
     if(numPreds + numParals >= numBooks)
       { cout << "Too many parals" << endl; exit(-1); }
     if(numWants > numBooks)
       { cout << "Too many wants" << endl; exit(-1); }
+    if(numWants + numReads > numBooks)
+      { cout << "Too many reads" << endl; exit(-1); }
 
 
     srand(time(0));
@@ -279,6 +299,7 @@ int main(int argc, char** args)
     coutPreds(); cout << endl;
     coutParals(); cout << endl;
     coutWants(); cout << endl;
+    coutReads(); cout << endl;
     cout << tail << endl;
     return 0;
 }

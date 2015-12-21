@@ -1,2 +1,2 @@
 #!/bin/bash
-./ff -o reading_plan.pddl -f prueba$1.pddl > resultado$1 ; cat resultado$1
+./ff -o reading_plan.pddl -f prueba$1.pddl > resultado$1.txt ; cat resultado$1.txt
